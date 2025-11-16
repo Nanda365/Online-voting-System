@@ -38,20 +38,22 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container nav_container">
-        <Link to="/elections" className="nav_logo">One Voting</Link>
+        <Link to={token ? "/elections" : "/"} className="nav_logo">One Voting</Link>
         <div className="nav_menu-container">
-          {token && showNav && (
+          {showNav && (
             <menu className="nav_menu">
-              <NavLink to="/elections" onClick={closeNavMenu}>Elections</NavLink>
-              {isAdmin ? (
-                <NavLink to="/results" onClick={closeNavMenu}>Results</NavLink>
-              ) : (
+              <NavLink to="/voteridpage" onClick={closeNavMenu}>VoterID</NavLink>
+              {token && (
                 <>
-                  <NavLink to="/voteridpage" onClick={closeNavMenu}>VoterID</NavLink>
-                  <NavLink to="/verify-voter" onClick={closeNavMenu}>Voting</NavLink>
+                  <NavLink to="/elections" onClick={closeNavMenu}>Elections</NavLink>
+                  {isAdmin ? (
+                    <NavLink to="/results" onClick={closeNavMenu}>Results</NavLink>
+                  ) : (
+                    <NavLink to="/verify-voter" onClick={closeNavMenu}>Voting</NavLink>
+                  )}
+                  <NavLink to="/logout" onClick={closeNavMenu}>Logout</NavLink>
                 </>
               )}
-              <NavLink to="/logout" onClick={closeNavMenu}>Logout</NavLink>
             </menu>
           )}
           <button className="theme_toggle-btn" onClick={toggleTheme} aria-label="Toggle Theme">
